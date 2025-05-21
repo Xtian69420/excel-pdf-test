@@ -3,25 +3,21 @@ function exc() {
     const wb = XLSX.utils.book_new();
   
     const ws = XLSX.utils.table_to_sheet(table);
+
+    const tableData = XLSX.utils.sheet_to_json(ws, { header: 1 });
+    const newWs = XLSX.utils.aoa_to_sheet([["Report Dummy Data"], ...tableData]);
   
-    XLSX.utils.sheet_add_aoa(ws, [["Report Dummy Data"]], { origin: "A1" });
+    newWs['!merges'] = [{
+      s: { r: 0, c: 0 },
+      e: { r: 0, c: 5 }
+    }];
   
-    const range = XLSX.utils.decode_range(ws['!ref']);
-    range.e.r += 1;
-    ws['!ref'] = XLSX.utils.encode_range(range);
-  
-    ws['!merges'] = ws['!merges'] || [];
-    ws['!merges'].push({
-      s: { r: 0, c: 0 }, 
-      e: { r: 0, c: 5 }  
-    });
-  
-    ws['A1'].s = {
+    newWs['A1'].s = {
       font: { bold: true, sz: 14 },
       alignment: { horizontal: "center" }
     };
   
-    XLSX.utils.book_append_sheet(wb, ws, "Report");
+    XLSX.utils.book_append_sheet(wb, newWs, "Report");
     XLSX.writeFile(wb, "report.xlsx");
   }
   
