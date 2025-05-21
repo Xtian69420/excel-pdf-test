@@ -23,20 +23,32 @@ function exc() {
   
   
   function pdf() {
-    const element = document.getElementById("report");
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF('l', 'mm', 'a4');
   
-    html2canvas(element).then(canvas => {
-      const imgData = canvas.toDataURL("image/png");
+    // Title
+    doc.setFontSize(16);
+    doc.text("Month of May Reports (dummy)", 140, 20, null, null, 'center');
   
-      const { jsPDF } = window.jspdf;
-      const pdf = new jsPDF('l', 'mm', 'a4');
-  
-      const imgProps = pdf.getImageProperties(imgData);
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-  
-      pdf.addImage(imgData, 'PNG', 10, 10, pdfWidth - 20, pdfHeight);
-      pdf.save("report.pdf");
+    // Extract table
+    const table = document.querySelector("table");
+    doc.autoTable({
+      html: table,
+      startY: 30,
+      theme: 'grid',
+      styles: {
+        fontSize: 10,
+        cellPadding: 4,
+      },
+      headStyles: {
+        fillColor: [34, 139, 34], // green
+        textColor: 255,
+      },
+      didDrawPage: function (data) {
+        doc.setFontSize(10);
+      }
     });
+  
+    doc.save("report.pdf");
   }
   
