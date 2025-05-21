@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Convert</title>
+  <link rel="stylesheet" href="src/styles/style.css" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+  <div id="report">
+    <h1>Month of May Reports (dummy)</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Name of Property</th>
+        <th>Week 1</th>
+        <th>Week 2</th>
+        <th>Week 3</th>
+        <th>Week 4</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td data-label="Name of Property">Property 1</td>
+        <td data-label="Week 1">11,000</td>
+        <td data-label="Week 2">13,000</td>
+        <td data-label="Week 3">14,000</td>
+        <td data-label="Week 4">8,0000</td>
+        <td data-label="Total">46,000</td>
+      </tr>
+      <tr>
+        <td data-label="Name of Property">Property 1</td>
+        <td data-label="Week 1">11,000</td>
+        <td data-label="Week 2">13,000</td>
+        <td data-label="Week 3">14,000</td>
+        <td data-label="Week 4">8,0000</td>
+        <td data-label="Total">46,000</td>
+      </tr>
+      <tr>
+        <td data-label="Name of Property">Property 2</td>
+        <td data-label="Week 1">11,000</td>
+        <td data-label="Week 2">13,000</td>
+        <td data-label="Week 3">14,000</td>
+        <td data-label="Week 4">8,0000</td>
+        <td data-label="Total">46,000</td>
+      </tr>
+      <tr>
+        <td data-label="Name of Property">Property 3</td>
+        <td data-label="Week 1">11,000</td>
+        <td data-label="Week 2">13,000</td>
+        <td data-label="Week 3">14,000</td>
+        <td data-label="Week 4">8,0000</td>
+        <td data-label="Total">46,000</td>
+      </tr>
+      <tr>
+        <td data-label="Name of Property">Property 4</td>
+        <td data-label="Week 1">11,000</td>
+        <td data-label="Week 2">13,000</td>
+        <td data-label="Week 3">14,000</td>
+        <td data-label="Week 4">8,0000</td>
+        <td data-label="Total">46,000</td>
+      </tr>
+      <tr class="total-row">
+        <td colspan="6">Total: 184,000</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="exports">
+    <p>Export to</p>
+    <button onclick="exc()" id="e">Excel</button>
+    <button onclick="pdf()" id="p">PDF</button>
+  </div>
+  <script src="src/scripts/converter.js"></script>
+</body>
+</html>
